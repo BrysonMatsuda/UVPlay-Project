@@ -3,7 +3,32 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: rgb(157, 156, 156);
-    color: white;
+    background-color: rgb(172, 97, 97);
+    color: rgb(0, 0, 0);
     text-align: center;
   }
+
+body {
+    background-image: url('../uvabackground.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.container{
+    background-color: rgba(128, 128, 128, 1);
+    width: calc(100% - 80px);
+    max-width: 1100px;
+    height: 600px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 50%; 
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1{
+    margin-left: 20px;
+}
