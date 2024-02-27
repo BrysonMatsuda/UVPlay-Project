@@ -27,6 +27,7 @@ body {
     left: 50%; 
     top: 50%;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 h1{
@@ -57,4 +58,24 @@ h1{
 
 .user-name{
     text-decoration: underline;
+}
+
+.section {
+    flex: 0 0 300px;
+    width: 300px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.same-size-image{
+    width: 300 px;
+    height: auto;
 }
