@@ -35,7 +35,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Daily Quiz</a>
-                      </li>  
+                    </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Leaderboard</a>
+                    </li>  
                                        
                   </ul>
 
@@ -48,7 +51,7 @@
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name text-light">NAME HERE</span>
-                    <button class = "btn btn-primary login-button">
+                    <button class = "btn btn-primary login-button" id = "loginclick">
                         <span class = "login-button-text">Login</span>
                     </button>
                     </div>
@@ -96,5 +99,10 @@
 	        </p>
         </footer>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            document.getElementById("loginclick").onclick = function(){
+                window.location.href = "login.html";
+            };
+        </script>
     </body>
  </html>
