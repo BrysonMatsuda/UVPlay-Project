@@ -136,11 +136,11 @@ h1{
     
 }
 
-table {
+.tableDiv table {
     width: 100%;
 }
 
-th, td {
+.tableDiv th, .tableDiv td {
     border: 1px solid white;
     padding: 20px;
     text-align: left;
@@ -149,4 +149,63 @@ th, td {
 .inputBoxDiv {
     margin-top: 20px;
    
+}
+
+
+
+.leaderboard-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-container th, #leaderboard-container td {
+    text-align: center;
+    padding: 1px;
+
+}
+
+
+
+.leaderboard-container img {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.leaderboardText {
+    color: white;
+}
+
+.leaderboard-container th, td{
+    border: 1px solid white;
+}
+
+
+
+
+
+
+select {
+    
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+  
+select:hover {
+    border-color: #888;
+}
+
+label {
+    
+    margin-bottom: 5px;
+    display: block;
+}
+
+.dropdownDiv {
+    text-align: right;
 }
