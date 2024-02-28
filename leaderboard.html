@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <head>
         <link rel="stylesheet" href="styles/main.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>     
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
@@ -53,13 +54,44 @@
 
 
         <div class = "container-main">
+
+            <div class="dropdownDiv">
+                <select id="myDropdown" name="options">
+                    <option value="option1">Daily Quiz</option>
+                    <option value="option2">Daily Crossword</option>
+                    <option value="option3">Daily Worlde</option>
+                    
+                </select>
+            </div>
+
+            
+
+
             <div class="youScore">
                 <h2>Your Score:</h2>
+            </div>
+            <div class="leaderboard-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Profile</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>37</td>
+                        <td><img src="profile1.jpg" alt="Profile 1"></td>
+                        <td>Angie</td>
+                        <td>54</td>
+                    </tr>
+                </table>
             </div>
             <div class="leaderboardHeading">
                 <h2 class="leaderboardText2">Leaderboard</h2>
             </div>
-            <div id="leaderboard-container">
+            <div class="leaderboard-container">
                 <table>
                     <thead>
                         <tr>
@@ -72,21 +104,27 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><img src="profile1.jpg" alt="Profile 1"></td>
+                            <td><img src="crossword.jpg" alt="Profile 1"></td>
                             <td>Alice</td>
                             <td>95</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><img src="profile2.png" alt="Profile 2"></td>
+                            <td><img src="monkey.jpg" alt="Profile 2"></td>
                             <td>Bob</td>
                             <td>90</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td><img src="profile1.jpg" alt="Profile 1"></td>
+                            <td><img src="wordle.jpg" alt="Profile 1"></td>
                             <td>Bryon</td>
                             <td>86</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><img src="random.jpg" alt="Profile 2"></td>
+                            <td>Ethan</td>
+                            <td>84</td>
                         </tr>
                         <tr>
                             <td>4</td>
