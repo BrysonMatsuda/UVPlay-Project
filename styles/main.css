@@ -91,3 +91,12 @@ h1{
     width: 33px;
     height: auto;
 }
+
+.login-container{
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color:rgb(175, 175, 175);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
