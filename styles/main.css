@@ -1,0 +1,102 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(49, 49, 49);
+    color: rgb(202, 202, 202);
+    text-align: center;
+  }
+
+body {
+    background-image: url('../uvabackground.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.container-main{
+    background-color: rgba(128, 128, 128, 1);
+    width: calc(100% - 80px);
+    max-width: 1100px;
+    height: 600px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 50%; 
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+h1{
+    margin-left: 20px;
+}
+
+.login-button{
+    margin-right: 5px;
+    background-color: rgb(255, 0, 0);
+    border-color:rgb(0, 0, 0);
+}
+
+.login-button-text{
+    color:rgb(0, 0, 0);
+}
+
+.profile-picture{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-picture img{
+    width: 100%;
+    height: auto;
+}
+
+.user-name{
+    text-decoration: underline;
+    padding-top: 7px;
+    padding-right: 5px;
+}
+
+.section {
+    flex: 0 0 300px;
+    width: 300px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.same-size-image{
+    width: 300 px;
+    height: auto;
+}
+
+.middleTitle{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#logo {
+    width: 33px;
+    height: auto;
+}
+
+.login-container{
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color:rgb(175, 175, 175);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
