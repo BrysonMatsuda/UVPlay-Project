@@ -76,6 +76,7 @@ h1{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    
 }
 
 @media screen and (max-width: 800px) {
@@ -226,4 +227,8 @@ label {
 
 .dropdownDiv {
     text-align: right;
+}
+
+.dropdownDiv label {
+    display: none;
 }
