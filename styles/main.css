@@ -64,6 +64,7 @@ h1{
 
 .section {
     flex: 0 0 300px;
+    flex-wrap: wrap;
     width: 300px;
     padding: 10px;
     margin-right: 20px;
@@ -75,6 +76,23 @@ h1{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section {
+        width: 100%; /* Set the width to 100% for smaller screens */
+        margin: 10px 0; /* Adjust margins */
+    }
+
+    .section img {
+        width: 300px; /* Let images resize according to their aspect ratio */
+        height: 300px; /* Let images resize according to their aspect ratio */
+    }
 }
 
 .same-size-image{
