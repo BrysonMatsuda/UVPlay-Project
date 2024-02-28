@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="styles/main.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>     
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        
+        <title>Leaderboard</title>
+    
     </head>
+
+
     <body>
 	    <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -56,7 +64,8 @@
         <div class = "container-main">
 
             <div class="dropdownDiv">
-                <select id="myDropdown" name="options">
+               
+                <select id="myDropdown" name="options" aria-label="Choose a game option to display its leaderboard">
                     <option value="option1">Daily Quiz</option>
                     <option value="option2">Daily Crossword</option>
                     <option value="option3">Daily Worlde</option>
