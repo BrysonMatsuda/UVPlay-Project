@@ -1,9 +1,12 @@
 <?php
 
 class HomeGameController{
+
+    private $db;
     public function __construct($input) {
         session_start();
         $this->input = $input;
+        $this->db = new Database();
         //get words from an api/json, or somewhere else
     }
 
@@ -37,7 +40,6 @@ class HomeGameController{
                 break;
             case "logout":
                 $this->sessionDestroyer();
-                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -102,31 +104,51 @@ class HomeGameController{
 
     public function checkPostedInfo(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-
             if(!empty($_POST["name"]) && !empty($_POST["password"])){
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["password"] = $_POST["password"];
                 $name = $_SESSION["name"];
                 $password = $_SESSION["password"];
                 $validPassword = false;
-
+    
                 $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
                 if (preg_match($password_pattern, $password) && $password != null) {
                     $validPassword = true;
-                    setcookie("username", $name, time() + 3600, "/");
-                    $this->showWelcomePage();
+                }
+    
+                if($validPassword) {
+                    $res = $this->db->query("SELECT * FROM users WHERE name = $1;", $name);
+    
+                    if(!empty($res)){
+                        // If user exists, verify the password
+                        $storedPassword = $res[0]["password"];
+                        if(password_verify($password, $storedPassword)){
+                            $_SESSION["name"] = $name;
+                            setcookie("username", $name, time() + 3600, "/");
+                            $this->showWelcomePage();
+                        } else {
+                            //Password doesn't match
+                            echo "Incorrect password.";
+                            include("login.php");
+                        }
+                    } else {
+                        // User doesn't exist, add user to the database
+                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                        $this->db->query("INSERT INTO users (name, password) VALUES ($1, $2);", $name, $hashedPassword);
+                        $_SESSION["name"] = $name;
+                        setcookie("username", $name, time() + 3600, "/");
+                        $this->showWelcomePage();
+                    }
                 } else {
                     echo("Please enter a valid password! Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
                     include("login.php");
                 }
-            }
-            else{
+            } else {
                 echo("Please enter a username and password!");
                 include("login.php");
             }
-        }
-        else{
-            echo("Please enter a username and password!");
+        } else {
+            echo("Please use POST method.");
             include("login.php");
         }
     }
