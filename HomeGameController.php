@@ -40,6 +40,10 @@ class HomeGameController{
                 break;
             case "logout":
                 $this->sessionDestroyer();
+                break;
+            case "wordlesubmitguess":
+                $this->wordleSubmitGuess();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -63,29 +67,93 @@ class HomeGameController{
         include("leaderboard.php");
     }
 
-    public function showWordle(){
 
-        $word = "TUNDY"; //maybe load this from the database in the future
+
+
+    public function showWordle($errorMessage=""){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        if(!isset($_SESSION["wordleWord"])){
+            $_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+        }
+
+        $word = $_SESSION["wordleWord"];
 
         $wordLength = strlen($word);
 
-        $firstGuess = false;
-
-        if(!isset($_SESSION["wordleGuessHistory"])){ //current user has not started this game - so show the starting point of the game
-            $firstGuess = true;
-        }
-        else{ //user has already started the game - so show the table with the guesses populated
-
-        }
-
-        $empty = "";
-        
-        $guessArray = ["angie", "fives", "tndya", "TUNDY"];
-
-        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        $guessArray = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : array();
 
         include("wordle.php");
     }
+
+
+
+
+    public function wordleSubmitGuess(){
+        
+        $guessString="";
+        $errorMessage="";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            foreach ($_POST as $key => $value) {
+                
+                if(empty($value)){
+                    $errorMessage="Invalid Guess: You must enter a letter in every spot.";
+                    $this->showWordle($errorMessage);
+                    exit();
+                }
+                elseif(!preg_match('/^[A-Za-z]+$/', $value)){
+                    $errorMessage="Invalid Guess: You must only enter letters A-Z.";
+                    $this->showWordle($errorMessage);
+                    exit();
+                }
+                else{
+                    $guessString = $guessString . $value;
+                }
+                
+            }
+
+        } 
+
+        if(!isset($_SESSION["wordleGuessArray"])){ //this is the first guess - instantiate the guess array
+            $_SESSION["wordleGuessArray"] = array();
+        }
+
+        $_SESSION["wordleGuessArray"][] = $guessString;
+
+        if(strtoupper($guessString) == strtoupper($_SESSION["wordleWord"])){ //correct guess!
+            $this->showWordleVictory();
+            exit();
+        }
+        else{
+            $this->showWordle();
+            exit();
+        }
+    }
+
+
+
+
+    public function showWordleVictory(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        if(!isset($_SESSION["wordleWord"])){
+            $_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+        }
+
+        $word = $_SESSION["wordleWord"];
+
+        $wordLength = strlen($word);
+
+        $guessArray = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : array();
+
+        $victoryMessage = "You won! You correctly guessed todays wordle in " . count($guessArray) . " guesses!";
+
+        include("wordlevictory.php");
+    }
+
+
+
 
     public function showCrossword(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
