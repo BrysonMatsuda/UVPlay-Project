@@ -29,6 +29,12 @@ class HomeGameController{
             case "showlogin":
                 $this->showLogin();
                 break;
+            case "showwelcome":
+                $this->showWelcomePage();
+                break;
+            case "showleaderboard":
+                $this->showLeaderboard();  
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -42,22 +48,32 @@ class HomeGameController{
     }
 
     public function showWelcomePage(){
+        $name = $_SESSION["name"];
         include("welcome.php");
     }
 
+    public function showLeaderboard(){
+        $name = $_SESSION["name"];
+        include("leaderboard.php");
+    }
+
     public function showWordle(){
+        $name = $_SESSION["name"];
         include("wordle.php");
     }
 
     public function showCrossword(){
+        $name = $_SESSION["name"];
         include("/put file for crossword here");
     }
 
     public function showQuiz(){
+        $name = $_SESSION["name"];
         include("quiz.php");
     }
 
     public function showLogin(){
+        $name = $_SESSION["name"];
         include("login.php");
     }
 
@@ -67,6 +83,8 @@ class HomeGameController{
             if(!empty($_POST["name"]) && !empty($_POST["password"])){
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["password"] = $_POST["password"];
+                $name = $_SESSION["name"];
+                $password = $_SESSION["password"];
                 $this->showWelcomePage();
             }
             else{
@@ -79,6 +97,7 @@ class HomeGameController{
             include("welcome.php");
         }
     }
+
 }
 
 
