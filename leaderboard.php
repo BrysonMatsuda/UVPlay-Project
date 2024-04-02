@@ -26,16 +26,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="welcome.php">Home</a>
+                      <a class="nav-link" href="?command=showwelcome">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.php">Daily Wordle<span class = "sr-only">(current)</span></a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle<span class = "sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.php">Daily Quiz</a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.php">Leaderboard<span class = "sr-only">(current)</span></a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard<span class = "sr-only">(current)</span></a>
                     </li>  
                                        
                   </ul>
@@ -48,9 +48,9 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -68,7 +68,7 @@
                 <select id="myDropdown" name="options" aria-label="Choose a game option to display its leaderboard">
                     <option value="option1">Daily Quiz</option>
                     <option value="option2">Daily Crossword</option>
-                    <option value="option3">Daily Worlde</option>
+                    <option value="option3">Daily Wordle</option>
                     
                 </select>
             </div>
@@ -157,7 +157,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.php";
+                window.location.href = "?command=showlogin";
             };
         </script>
     </body>

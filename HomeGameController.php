@@ -29,6 +29,15 @@ class HomeGameController{
             case "showlogin":
                 $this->showLogin();
                 break;
+            case "showwelcome":
+                $this->showWelcomePage();
+                break;
+            case "showleaderboard":
+                $this->showLeaderboard();  
+                break;
+            case "logout":
+                $this->sessionDestroyer();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -38,14 +47,22 @@ class HomeGameController{
     public function sessionDestroyer(){
         session_destroy();
         header("Location: index.php");
+        session_start();
         exit();
     }
 
     public function showWelcomePage(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("welcome.php");
     }
 
+    public function showLeaderboard(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        include("leaderboard.php");
+    }
+
     public function showWordle(){
+
         $word = "TUNDY"; //maybe load this from the database in the future
 
         $wordLength = strlen($word);
@@ -69,14 +86,17 @@ class HomeGameController{
     }
 
     public function showCrossword(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("/put file for crossword here");
     }
 
     public function showQuiz(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("quiz.php");
     }
 
     public function showLogin(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("login.php");
     }
 
@@ -86,18 +106,31 @@ class HomeGameController{
             if(!empty($_POST["name"]) && !empty($_POST["password"])){
                 $_SESSION["name"] = $_POST["name"];
                 $_SESSION["password"] = $_POST["password"];
-                $this->showWelcomePage();
+                $name = $_SESSION["name"];
+                $password = $_SESSION["password"];
+                $validPassword = false;
+
+                $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+                if (preg_match($password_pattern, $password) && $password != null) {
+                    $validPassword = true;
+                    setcookie("username", $name, time() + 3600, "/");
+                    $this->showWelcomePage();
+                } else {
+                    echo("Please enter a valid password! Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
+                    include("login.php");
+                }
             }
             else{
                 echo("Please enter a username and password!");
-                include("welcome.php");
+                include("login.php");
             }
         }
         else{
             echo("Please enter a username and password!");
-            include("welcome.php");
+            include("login.php");
         }
     }
+
 }
 
 

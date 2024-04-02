@@ -32,16 +32,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="welcome.php">Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="?command=showwelcome">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.php">Daily Wordle</a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.php">Daily Quiz</a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.php">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -54,9 +54,9 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -85,15 +85,15 @@
             <div class="container">
                 <section class="section">
                     <img src="crossword.jpg" width="300" alt="Crossword" class="same-size-image">
-                    <h2><a href="quiz.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
+                    <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
                 </section>
                 <section class="section">
                     <img src="wordle.jpg" width="300" alt="Wahoo Word" class="same-size-image">
-                    <h2><a href="wordle.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
+                    <h2><a href="?command=showwordle" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
                 </section>
                 <section class="section">
                     <img src="lightbulb.jpg" width="300" alt="Random" class="same-size-image">
-                    <h2><a href="quiz.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
+                    <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
                 </section>
             </div>
         </div>
@@ -104,7 +104,7 @@
         </footer>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.php";
+                window.location.href = "?command=showlogin";
             };
         </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
