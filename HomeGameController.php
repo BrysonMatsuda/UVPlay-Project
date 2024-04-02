@@ -88,11 +88,6 @@ class HomeGameController{
 
     public function wordleSubmitGuess(){
         
-
-        if(!isset($_SESSION["wordleGuessHistory"])){ //this is the first guess - instantiate the guess array
-            
-        }
-
         $guessString="";
         $errorMessage="";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -122,12 +117,40 @@ class HomeGameController{
         }
 
         $_SESSION["wordleGuessArray"][] = $guessString;
-        $this->showWordle();
-        exit();
 
-        
-
+        if(strtoupper($guessString) == strtoupper($_SESSION["wordleWord"])){ //correct guess!
+            $this->showWordleVictory();
+            exit();
+        }
+        else{
+            $this->showWordle();
+            exit();
+        }
     }
+
+
+
+
+    public function showWordleVictory(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        if(!isset($_SESSION["wordleWord"])){
+            $_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+        }
+
+        $word = $_SESSION["wordleWord"];
+
+        $wordLength = strlen($word);
+
+        $guessArray = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : array();
+
+        $victoryMessage = "You won! You correctly guessed todays wordle in " . count($guessArray) . " guesses!";
+
+        include("wordlevictory.php");
+    }
+
+
+
 
     public function showCrossword(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
