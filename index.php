@@ -8,6 +8,6 @@ spl_autoload_register(function ($classname) {
     include "$classname.php";
 });
 
-$game = new CategoryGameController($_GET);
+$game = new HomeGameController($_GET);
 
 $game->run();

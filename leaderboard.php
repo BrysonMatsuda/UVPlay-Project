@@ -26,16 +26,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home</a>
+                      <a class="nav-link" href="welcome.php">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle<span class = "sr-only">(current)</span></a>
+                      <a class="nav-link" href="wordle.php">Daily Wordle<span class = "sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz</a>
+                        <a class="nav-link" href="quiz.php">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard<span class = "sr-only">(current)</span></a>
+                        <a class="nav-link" href="leaderboard.php">Leaderboard<span class = "sr-only">(current)</span></a>
                     </li>  
                                        
                   </ul>
@@ -157,7 +157,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "login.php";
             };
         </script>
     </body>

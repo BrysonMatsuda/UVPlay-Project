@@ -32,16 +32,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                      <a class="nav-link" href="welcome.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle</a>
+                      <a class="nav-link" href="wordle.php">Daily Wordle</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz</a>
+                        <a class="nav-link" href="quiz.php">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -85,15 +85,15 @@
             <div class="container">
                 <section class="section">
                     <img src="crossword.jpg" width="300" alt="Crossword" class="same-size-image">
-                    <h2><a href="quiz.html" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
+                    <h2><a href="quiz.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
                 </section>
                 <section class="section">
                     <img src="wordle.jpg" width="300" alt="Wahoo Word" class="same-size-image">
-                    <h2><a href="wordle.html" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
+                    <h2><a href="wordle.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
                 </section>
                 <section class="section">
                     <img src="lightbulb.jpg" width="300" alt="Random" class="same-size-image">
-                    <h2><a href="quiz.html" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
+                    <h2><a href="quiz.php" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
                 </section>
             </div>
         </div>
@@ -104,7 +104,7 @@
         </footer>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "login.php";
             };
         </script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

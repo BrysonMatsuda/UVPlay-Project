@@ -64,11 +64,9 @@ class HomeGameController{
     public function checkPostedInfo(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-            if(!empty($_POST["name"]) && !empty($_POST["email"])){
+            if(!empty($_POST["name"]) && !empty($_POST["password"])){
                 $_SESSION["name"] = $_POST["name"];
-                $_SESSION["email"] = $_POST["email"];
-                $_SESSION["guesses"] = 0;
-                $_SESSION["guessArray"] = array();
+                $_SESSION["password"] = $_POST["password"];
                 $this->showWelcomePage();
             }
             else{
