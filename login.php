@@ -54,7 +54,7 @@
         <div class = "container-main">
             <div class="login-container"> <!--https://www.w3schools.com/howto/howto_css_login_form.asp-->
                 <h2>Login</h2>
-                <form id = "login-form">
+                <form id = "login-form" action = "index.php?command=postwelcome" method = "POST">
                     <div class = "form-group">
                         <label for = "username">Username:</label>
                         <input type = "text" id = "username" name = "username" required>
