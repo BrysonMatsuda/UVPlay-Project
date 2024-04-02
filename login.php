@@ -44,7 +44,7 @@
                     </div>
                     <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -63,7 +63,7 @@
                         <label for = "password">Password:</label>
                         <input type = "text" id = "password" name = "password" required>
                     </div>
-                    <button type = "submit" class = "btn btn primary">Login</button>
+                    <button type = "submit" class = "submit-button">Login</button>
                 </form>
             </div>
             <a href="?command=logout" class="btn btn-danger logout-button">Logout</a>

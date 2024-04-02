@@ -89,16 +89,26 @@ class HomeGameController{
                 $_SESSION["password"] = $_POST["password"];
                 $name = $_SESSION["name"];
                 $password = $_SESSION["password"];
-                $this->showWelcomePage();
+                $validPassword = false;
+
+                $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+                if (preg_match($password_pattern, $password) && $password != null) {
+                    $validPassword = true;
+                    setcookie("username", $name, time() + 3600, "/");
+                    $this->showWelcomePage();
+                } else {
+                    echo("Please enter a valid password! Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
+                    include("login.php");
+                }
             }
             else{
                 echo("Please enter a username and password!");
-                include("welcome.php");
+                include("login.php");
             }
         }
         else{
             echo("Please enter a username and password!");
-            include("welcome.php");
+            include("login.php");
         }
     }
 

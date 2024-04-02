@@ -50,7 +50,7 @@
                     </div>
                     <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -68,7 +68,7 @@
                 <select id="myDropdown" name="options" aria-label="Choose a game option to display its leaderboard">
                     <option value="option1">Daily Quiz</option>
                     <option value="option2">Daily Crossword</option>
-                    <option value="option3">Daily Worlde</option>
+                    <option value="option3">Daily Wordle</option>
                     
                 </select>
             </div>
