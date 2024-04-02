@@ -5,7 +5,13 @@
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <title>Login</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script id="pm-script" src="https://amuselabs.com/pmm/js/puzzleme-embed.js"></script>
+        <script>
+            PM_Config.PM_BasePath = "https://amuselabs.com/pmm/";
+        </script>
+        <title>Daily Wordle</title>
     </head>
     <body>
 	    <header>
@@ -20,16 +26,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home</a>
+                      <a class="nav-link" href="?command=showwelcome">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle</a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle<span class = "sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz</a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -42,9 +48,9 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -52,20 +58,7 @@
             </nav>
         </header>
         <div class = "container-main">
-            <div class="login-container"> <!--https://www.w3schools.com/howto/howto_css_login_form.asp-->
-                <h2>Login</h2>
-                <form id = "login-form">
-                    <div class = "form-group">
-                        <label for = "username">Username:</label>
-                        <input type = "text" id = "username" name = "username" required>
-                    </div>
-                    <div class = "form-group">
-                        <label for = "password">Password:</label>
-                        <input type = "text" id = "password" name = "password" required>
-                    </div>
-                    <button type = "submit" class = "btn btn primary">Login</button>
-                </form>
-            </div>
+            <div class="pm-embed-div" data-id="dbb4fa87" data-set="4e37bca13313144e7388be36b01cc90d301be22112c012a125e470d3d6618384" data-puzzleType="crossword" data-height="500px"></div>
         </div>
 	    <footer class = "footer">
 	        <p>
@@ -75,7 +68,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "?command=showlogin";
             };
         </script>
     </body>
