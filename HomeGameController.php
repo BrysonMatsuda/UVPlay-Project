@@ -46,6 +46,23 @@ class HomeGameController{
     }
 
     public function showWordle(){
+        $word = "TUNDaY"; //maybe load this from the database in the future
+
+        $wordLength = strlen($word);
+
+        $firstGuess = false;
+
+        if(!isset($_SESSION["wordleGuessHistory"])){ //current user has not started this game - so show the starting point of the game
+            $firstGuess = true;
+        }
+        else{ //user has already started the game - so show the table with the guesses populated
+
+        }
+
+        $empty = "";
+        
+        $guessArray = ["angiea", "fiveas", "tandya"];
+
         include("wordle.php");
     }
 
@@ -80,7 +97,6 @@ class HomeGameController{
         }
     }
 }
-
 
 
 

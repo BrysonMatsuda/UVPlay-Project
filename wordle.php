@@ -2,15 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/wordle.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-        <script id="pm-script" src="https://amuselabs.com/pmm/js/puzzleme-embed.js"></script>
-        <script>
-            PM_Config.PM_BasePath = "https://amuselabs.com/pmm/";
-        </script>
+        
         <title>Daily Wordle</title>
     </head>
     <body>
@@ -57,9 +54,35 @@
                 </div>
             </nav>
         </header>
+
+
         <div class = "container-main">
-            <div class="pm-embed-div" data-id="dbb4fa87" data-set="4e37bca13313144e7388be36b01cc90d301be22112c012a125e470d3d6618384" data-puzzleType="crossword" data-height="500px"></div>
+            <h1 class="text-light">Daily Wordle</h2>
+            <div class="wordle-container">
+                <div>
+                    <?php for($numGuessesCounter=0; $numGuessesCounter < 6; $numGuessesCounter++){  ?> 
+                    
+                    <div class="wordle-row">
+                        
+                        <?php for($wordLengthCounter=0; $wordLengthCounter < $wordLength; $wordLengthCounter++){  ?> 
+                        <div class="wordle-cell" style="background-color: <?php if(isset($guessArray[$numGuessesCounter])){if(strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]) == strtoupper($word[$wordLengthCounter])){ echo 'green';}elseif(strpos(strtoupper($word), strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter])) != false){echo 'yellow';}else{echo 'darkgray';}}else{ echo 'initial';}?>;"><?php if(isset($guessArray[$numGuessesCounter])){ echo strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]);}?></div>
+                        <?php } ?>
+                    </div>
+                    
+                    <?php }?>
+
+
+
+
+
+
+                    
+                    
+                </div>
+            </div>
         </div>
+
+
 	    <footer class = "footer">
 	        <p>
 	            <small>All Rights Reserved. Designed by Bryson Matsuda and Sam Harless</small>
@@ -73,3 +96,8 @@
         </script>
     </body>
 </html>
+
+
+
+
+
