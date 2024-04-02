@@ -2,12 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles/main.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="styles/wordle.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-        <title>Daily Quiz</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        
+        <title>Daily Wordle</title>
     </head>
     <body>
 	    <header>
@@ -22,16 +23,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home</a>
+                      <a class="nav-link" href="?command=showwelcome">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle</a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle<span class = "sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz<span class = "sr-only">(current)</span></a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -44,9 +45,9 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -55,52 +56,31 @@
         </header>
 
 
-
         <div class = "container-main">
-            <div class="topContainerBar">
-                <div class="questionBox">
-                    <h3 class="questionText">Name as many UVA acapella groups as you can in 2 minutes!</h3>
-                </div> 
+            <h1 class="text-light">Daily Wordle</h2>
+            <div class="wordle-container">
+                <div>
+                    <?php for($numGuessesCounter=0; $numGuessesCounter < 6; $numGuessesCounter++){  ?> 
+                    
+                    <div class="wordle-row">
+                        
+                        <?php for($wordLengthCounter=0; $wordLengthCounter < $wordLength; $wordLengthCounter++){  ?> 
+                        <div class="wordle-cell" style="background-color: <?php if(isset($guessArray[$numGuessesCounter])){if(strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]) == strtoupper($word[$wordLengthCounter])){ echo 'green';}elseif(strpos(strtoupper($word), strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter])) != false){echo 'yellow';}else{echo 'darkgray';}}else{ echo 'initial';}?>;"><?php if(isset($guessArray[$numGuessesCounter])){ echo strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]);}?></div>
+                        <?php } ?>
+                    </div>
+                    
+                    <?php }?>
 
-                <div class="timerBox">
-                    <h3 class="timerText">2:00</h3>
+
+
+
+
+
+                    
+                    
                 </div>
             </div>
-
-            <div class="inputBoxDiv">
-                <input type="text" class="inputBox" placeholder="Enter Answers Here...">
-            </div>
-
-            <div class="tableDiv">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </table>
-            </div>
         </div>
-
 
 
 	    <footer class = "footer">
@@ -111,8 +91,13 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "?command=showlogin";
             };
         </script>
     </body>
 </html>
+
+
+
+
+

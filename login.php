@@ -20,16 +20,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home</a>
+                      <a class="nav-link" href="?command=showwelcome">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle</a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz</a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -42,9 +42,9 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
@@ -54,18 +54,19 @@
         <div class = "container-main">
             <div class="login-container"> <!--https://www.w3schools.com/howto/howto_css_login_form.asp-->
                 <h2>Login</h2>
-                <form id = "login-form">
+                <form id = "login-form" action = "index.php?command=postwelcome" method = "POST">
                     <div class = "form-group">
-                        <label for = "username">Username:</label>
-                        <input type = "text" id = "username" name = "username" required>
+                        <label for = "name">Username:</label>
+                        <input type = "text" id = "name" name = "name" required>
                     </div>
                     <div class = "form-group">
                         <label for = "password">Password:</label>
                         <input type = "text" id = "password" name = "password" required>
                     </div>
-                    <button type = "submit" class = "btn btn primary">Login</button>
+                    <button type = "submit" class = "submit-button">Login</button>
                 </form>
             </div>
+            <a href="?command=logout" class="btn btn-danger logout-button">Logout</a>
         </div>
 	    <footer class = "footer">
 	        <p>
@@ -75,7 +76,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "?command=showlogin";
             };
         </script>
     </body>

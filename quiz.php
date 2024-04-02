@@ -3,15 +3,11 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles/main.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-        <script id="pm-script" src="https://amuselabs.com/pmm/js/puzzleme-embed.js"></script>
-        <script>
-            PM_Config.PM_BasePath = "https://amuselabs.com/pmm/";
-        </script>
-        <title>Daily Wordle</title>
+    
+        <title>Daily Quiz</title>
     </head>
     <body>
 	    <header>
@@ -26,16 +22,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="index.html">Home</a>
+                      <a class="nav-link" href="?command=showwelcome">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="wordle.html">Daily Wordle<span class = "sr-only">(current)</span></a>
+                      <a class="nav-link" href="?command=showwordle">Daily Wordle</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="quiz.html">Daily Quiz</a>
+                        <a class="nav-link" href="?command=showquiz">Daily Quiz<span class = "sr-only">(current)</span></a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
                     </li>  
                                        
                   </ul>
@@ -48,18 +44,65 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">NAME HERE</span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
-                        <span class = "login-button-text">Login</span>
+                        <span class = "login-button-text">Login/Logout</span>
                     </button>
                     </div>
                   
                 </div>
             </nav>
         </header>
+
+
+
         <div class = "container-main">
-            <div class="pm-embed-div" data-id="dbb4fa87" data-set="4e37bca13313144e7388be36b01cc90d301be22112c012a125e470d3d6618384" data-puzzleType="crossword" data-height="500px"></div>
+            <div class="topContainerBar">
+                <div class="questionBox">
+                    <h3 class="questionText">Name as many UVA acapella groups as you can in 2 minutes!</h3>
+                </div> 
+
+                <div class="timerBox">
+                    <h3 class="timerText">2:00</h3>
+                </div>
+            </div>
+
+            <div class="inputBoxDiv">
+                <input type="text" class="inputBox" placeholder="Enter Answers Here...">
+            </div>
+
+            <div class="tableDiv">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
         </div>
+
+
+
 	    <footer class = "footer">
 	        <p>
 	            <small>All Rights Reserved. Designed by Bryson Matsuda and Sam Harless</small>
@@ -68,7 +111,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script>
             document.getElementById("loginclick").onclick = function(){
-                window.location.href = "login.html";
+                window.location.href = "?command=showlogin";
             };
         </script>
     </body>
