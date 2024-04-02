@@ -46,7 +46,7 @@ class HomeGameController{
     }
 
     public function showWordle(){
-        $word = "TUNDaY"; //maybe load this from the database in the future
+        $word = "TUNDY"; //maybe load this from the database in the future
 
         $wordLength = strlen($word);
 
@@ -61,7 +61,9 @@ class HomeGameController{
 
         $empty = "";
         
-        $guessArray = ["angiea", "fiveas", "tandya"];
+        $guessArray = ["angie", "fives", "tndya", "TUNDY"];
+
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
 
         include("wordle.php");
     }
