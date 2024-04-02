@@ -26,7 +26,6 @@
     $res  = pg_query($dbHandle, "create table users (
             id  int primary key default nextval('user_seq'),
             name text,
-            email text,
             password text,
             score int);");
 
