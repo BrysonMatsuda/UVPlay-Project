@@ -66,6 +66,7 @@
                     <button type = "submit" class = "btn btn primary">Login</button>
                 </form>
             </div>
+            <a href="?command=logout" class="btn btn-danger logout-button">Logout</a>
         </div>
 	    <footer class = "footer">
 	        <p>

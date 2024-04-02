@@ -35,6 +35,9 @@ class HomeGameController{
             case "showleaderboard":
                 $this->showLeaderboard();  
                 break;
+            case "logout":
+                $this->sessionDestroyer();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -44,36 +47,37 @@ class HomeGameController{
     public function sessionDestroyer(){
         session_destroy();
         header("Location: index.php");
+        session_start();
         exit();
     }
 
     public function showWelcomePage(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("welcome.php");
     }
 
     public function showLeaderboard(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("leaderboard.php");
     }
 
     public function showWordle(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("wordle.php");
     }
 
     public function showCrossword(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("/put file for crossword here");
     }
 
     public function showQuiz(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("quiz.php");
     }
 
     public function showLogin(){
-        $name = $_SESSION["name"];
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("login.php");
     }
 
