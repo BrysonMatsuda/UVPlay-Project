@@ -40,6 +40,15 @@ class HomeGameController{
                 break;
             case "logout":
                 $this->sessionDestroyer();
+            case "showprofile":
+                $this->showProfile();
+                break;
+            case "editprofile":
+                $this->editDetails();
+                break;
+            case "checkstats":
+                $this->checkStats();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -51,6 +60,21 @@ class HomeGameController{
         header("Location: index.php");
         session_start();
         exit();
+    }
+
+    public function showProfile(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        include("profile.php");
+    }
+    
+    public function editDetails(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        include("editprofile.php");
+    }
+
+    public function checkStats(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        include("checkstats.php");
     }
 
     public function showWelcomePage(){
