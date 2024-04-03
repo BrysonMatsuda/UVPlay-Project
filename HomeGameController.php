@@ -43,11 +43,14 @@ class HomeGameController{
             case "showprofile":
                 $this->showProfile();
                 break;
-            case "editprofile":
+            case "editdetails":
                 $this->editDetails();
                 break;
             case "checkstats":
                 $this->checkStats();
+                break;
+            case "showdetails":
+                $this->showDetails();
                 break;
             default:
                 $this->showWelcomePage();
@@ -66,9 +69,51 @@ class HomeGameController{
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
         include("profile.php");
     }
-    
+
+    public function showDetails(){
+        $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        include("editprofile.php");
+    }
+
     public function editDetails(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+        $currentUsername = $name;
+        $currentPassword = isset($_SESSION["password"]) ? $_SESSION["password"] : "";
+    
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $newUsername = isset($_POST["newUsername"]) ? $_POST["newUsername"] : $currentUsername;
+            $newPassword = isset($_POST["newPassword"]) ? $_POST["newPassword"] : $currentPassword;
+    
+            $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+    
+            $usernameChanged = $newUsername !== $currentUsername;
+            $passwordChanged = $newPassword !== $currentPassword;
+    
+            if ($usernameChanged || $passwordChanged) {
+                if ($passwordChanged && !preg_match($password_pattern, $newPassword)) {
+                    echo "<script>alert('Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long.');</script>";
+                } else {
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+                    $result = $this->db->query("UPDATE users SET name = $1, password = $2 WHERE name = $3", $newUsername, $hashedPassword, $currentUsername);
+    
+                    if ($result !== false) {
+                        if (count($result) > 0) {
+                            $_SESSION["name"] = $newUsername;
+                            $_SESSION["password"] = $hashedPassword;
+                            echo "<script>alert('Details updated successfully!');</script>";
+                        } else {
+                            echo "<script>alert('No rows affected.');</script>";
+                        }
+                    } else {
+                        echo "<script>alert('Error occurred during update.');</script>";
+                    }
+                }
+            } else {
+                echo "<script>alert('No changes were made.');</script>";
+            }
+        }
+    
         include("editprofile.php");
     }
 

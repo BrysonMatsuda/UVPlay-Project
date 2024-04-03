@@ -65,7 +65,7 @@
             <h1 class="text-light">Edit Profile</h2>
             <div class="container">
             <?php if(isset($_SESSION["name"])): ?>
-                <form action="?command = editdetails" method="POST">
+                <form action="?command=editdetails" method="POST" id = "editform">
                     <div class="form-group">
                         <label for="currentUsername">Current Username:</label>
                         <input type="text" class="form-control" id="currentUsername" name="currentUsername" value="<?php echo $_SESSION["name"]; ?>" readonly>
@@ -83,12 +83,13 @@
                         <label for="newPassword">New Password:</label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword">
                     </div>
-                </form>
+
+                    <button type = "submit" class = "btn btn-primary mr-2">Confirm</button>
+                </form> 
             <?php endif; ?>
             </div>
             <div class="d-flex justify-content-end align-items-end fixed-bottom mb-3 mr-3">
-                <button class="btn btn-primary mr-2" onclick="window.location.href='index.php?command=showprofile';">Cancel</button>
-                <button class="btn btn-primary" onclick="confirmEdit();">Confirm</button>
+                <button class="btn btn-primary mr-2" onclick="window.location.href='?command=showprofile';">Cancel</button>
             </div>
         </div>
 

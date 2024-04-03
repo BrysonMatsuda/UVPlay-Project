@@ -70,7 +70,7 @@
                     
                 <?php endif; ?>
                 <?php if(isset($_SESSION["name"])): ?>
-                    <a href="index.php?command=editprofile" class="btn btn-primary mr-2">Edit Profile</a>
+                    <a href="index.php?command=showdetails" class="btn btn-primary mr-2">Edit Profile</a>
                     <a href="index.php?command=checkstats" class="btn btn-primary">My Stats</a>
                 <?php endif; ?>
                 </div>
