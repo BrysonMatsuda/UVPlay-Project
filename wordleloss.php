@@ -59,7 +59,7 @@
         <div class = "container-main">
             
             
-            <div class="alert alert-success" role="alert"><?php echo $victoryMessage; ?></div>
+            <div class="alert alert-danger" role="alert"><?php echo $lossMessage; ?></div>
             
             <div class="wordle-container">
                 <div>

@@ -96,6 +96,13 @@
                                     boxes[index + 1].focus(); //puts keyboard input into the next box
                                 }
                             });
+
+                            box.addEventListener('keydown', (event) => { // similar thing, if you press backspace it takes you to the previous box
+                                if (event.key === 'Backspace' && box.value.length === 0 && index > 0) {
+                                    boxes[index - 1].focus();
+                                }
+                            });
+
                         });
                     </script>
 
