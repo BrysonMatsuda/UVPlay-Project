@@ -86,13 +86,13 @@ h1{
     }
 
     .section {
-        width: 100%; /* Set the width to 100% for smaller screens */
-        margin: 10px 0; /* Adjust margins */
+        width: 100%; 
+        margin: 10px 0; 
     }
 
     .section img {
-        width: 300px; /* Let images resize according to their aspect ratio */
-        height: 300px; /* Let images resize according to their aspect ratio */
+        width: 300px; 
+        height: 300px; 
     }
 }
 
