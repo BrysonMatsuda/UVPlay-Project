@@ -55,6 +55,9 @@ class HomeGameController{
             case "wordlesubmitguess":
                 $this->wordleSubmitGuess();
                 break;
+            case "viewwordleleaderboard":
+                $this->viewWordleLeaderboard();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -142,7 +145,14 @@ class HomeGameController{
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
 
         if(!isset($_SESSION["wordleWord"])){
-            $_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+            //$_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+            $dateString=date('Y-m-d',strtotime("Today"));
+            //echo $dateString ; 
+            $res = $this->db->query("SELECT * FROM wordle_words WHERE date = $1;", $dateString);
+            //var_dump($res);
+            $_SESSION["wordleWord"] = $res[0]["word"];
+            $_SESSION["wordleDate"] = $dateString;
+            
         }
 
         $word = $_SESSION["wordleWord"];
@@ -206,7 +216,14 @@ class HomeGameController{
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
 
         if(!isset($_SESSION["wordleWord"])){
-            $_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+            //$_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+            $dateString=date('Y-m-d',strtotime("Today"));
+            //echo $dateString ; 
+            $res = $this->db->query("SELECT * FROM wordle_words WHERE date = $1;", $dateString);
+            //var_dump($res);
+            $_SESSION["wordleWord"] = $res[0]["word"];
+            $_SESSION["wordleDate"] = $dateString;
+            
         }
 
         $word = $_SESSION["wordleWord"];
@@ -216,6 +233,13 @@ class HomeGameController{
         $guessArray = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : array();
 
         $victoryMessage = "You won! You correctly guessed todays wordle in " . count($guessArray) . " guesses!";
+        $user_id = 0;
+        if(isset($_SESSION["name"])){
+            $res = $this->db->query("SELECT * FROM users WHERE name = $1;", $_SESSION["name"]);
+            $user_id = $res[0]["id"];
+            //echo $user_id;
+        }
+        $res = $this->db->query("INSERT INTO wordle_scores (user_id, score, date) VALUES ($1, $2, $3)", $user_id, count($guessArray), $_SESSION["wordleDate"] );//left off here
 
         include("wordlevictory.php");
     }
@@ -289,9 +313,28 @@ class HomeGameController{
         }
     }
 
+
+
+
+    public function viewWordleLeaderboard(){
+        if(!isset($_SESSION["wordleWord"])){
+            //$_SESSION["wordleWord"] = "TUNDY";//maybe load this from the database in the future
+            $dateString=date('Y-m-d',strtotime("Today"));
+            //echo $dateString ; 
+            $res = $this->db->query("SELECT * FROM wordle_words WHERE date = $1;", $dateString);
+            //var_dump($res);
+            $_SESSION["wordleWord"] = $res[0]["word"];
+            $_SESSION["wordleDate"] = $dateString;
+            
+        }
+
+        $res = $this->db->query("SELECT s.score, u.name FROM wordle_scores s JOIN users u ON s.user_id = u.id WHERE date=$1 ORDER BY score ASC LIMIT 10;", $_SESSION["wordleDate"]);
+
+        $lbArray = $res;
+        var_dump($lbArray);
+        exit();
+    }
 }
-
-
 
 
 
