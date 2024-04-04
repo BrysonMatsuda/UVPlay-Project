@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label for="newUsername">New Username:</label>
-                        <input type="text" class="form-control" id="newUsername" name="newUsername">
+                        <input type="text" class="form-control" id="newUsername" name="newUsername" minlength = "5">
                     </div>
                     <div class="form-group">
                         <label for="currentPassword">Current Password:</label>
