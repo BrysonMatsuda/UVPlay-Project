@@ -36,7 +36,8 @@ class HomeGameController{
                 $this->showWelcomePage();
                 break;
             case "showleaderboard":
-                $this->showLeaderboard();  
+                //$this->showLeaderboard();  
+                $this->viewWordleLeaderboard();
                 break;
             case "logout":
                 $this->sessionDestroyer();
@@ -57,6 +58,9 @@ class HomeGameController{
                 break;
             case "viewwordleleaderboard":
                 $this->viewWordleLeaderboard();
+                break;
+            case "jsontest":
+                $this->jsonGetter();
                 break;
             default:
                 $this->showWelcomePage();
@@ -161,6 +165,11 @@ class HomeGameController{
 
     public function showWordle($errorMessage=""){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        if(!isset($_SESSION["name"])){
+            header("Location: index.php?command=showlogin");
+            exit();
+        }
 
         if(isset($_SESSION["wordleVictory"])){
             if($_SESSION["wordleVictory"]){
@@ -460,6 +469,26 @@ class HomeGameController{
         include("wordleleaderboard.php");
         exit();
     }
+
+
+
+    public function jsonGetter(){
+        
+        //you know how NYT does that thing where they allow you to export your score? i was thinking this could be something like that. 
+
+        
+        
+        $data["guessArray"] = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : [];
+        $data["name"] = isset($_SESSION["name"]) ? $_SESSION["name"] : "No Name";
+        $data["wordleVictory"] = isset($_SESSION["wordleVictory"]) ? $_SESSION["wordleVictory"] : false;
+        
+        
+        include("jsontest.php");
+    }
+
+
+
+
 }
 
 
