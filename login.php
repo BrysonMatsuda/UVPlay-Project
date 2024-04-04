@@ -63,7 +63,7 @@
                 <form id = "login-form" action = "index.php?command=postwelcome" method = "POST">
                     <div class = "form-group">
                         <label for = "name">Username:</label>
-                        <input type = "text" id = "name" name = "name" required>
+                        <input type = "text" id = "name" name = "name" required minlength="5">
                     </div>
                     <div class = "form-group">
                         <label for = "password">Password:</label>
