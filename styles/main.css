@@ -233,6 +233,7 @@ label {
     display: none;
 }
 
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -241,3 +242,8 @@ label {
 .button-container .btn {
     margin-right: 5px;
 }
+
+.lbentry {
+    text-align: center;
+}
+

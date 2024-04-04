@@ -45,13 +45,7 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light">
-                        <?php if(isset($_SESSION["name"])): ?>
-                            <a href="index.php?command=showprofile"><?php echo $_SESSION["name"]; ?></a>
-                        <?php else: ?>
-                            Name Here
-                        <?php endif; ?>
-                    </span>
+                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
                         <span class = "login-button-text">Login/Logout</span>
                     </button>
@@ -64,9 +58,9 @@
 
         <div class = "container-main">
             
-            <?php if(!empty($errorMessage)){ ?>
-                <div class="alert alert-danger" role="alert"><?php echo $errorMessage; ?></div>
-            <?php } ?>
+            
+            <div class="alert alert-success" role="alert"><?php echo $victoryMessage; ?></div>
+            
             <div class="wordle-container">
                 <div>
                     <?php for($numGuessesCounter=0; $numGuessesCounter < 6; $numGuessesCounter++){  ?> 
@@ -80,31 +74,10 @@
                     
                     <?php }?>
                     
-                    <form action="?command=wordlesubmitguess" method="post">
-                        <div class="guess-container">
-                            <?php for($wordLengthCounter2=0; $wordLengthCounter2 < $wordLength; $wordLengthCounter2++){  ?> 
-                            <input type="text" maxlength="1" class="guess-box" name="wordleInput<?php echo $wordLengthCounter2 ?>">
-                            <?php } ?>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="wordleSubmitButton">Submit Guess</button>
+                    <form action="?command=viewwordleleaderboard" method="post">
+                        <button type="submit" class="btn btn-primary" id="wordleSubmitButton">View Leaderboard</button>
                     </form>
-                    <script>
-                        //i took CS 3240 so have some memory of how to use JS event listeners
-                        document.querySelectorAll('.guess-box').forEach((box, index, boxes) => { //query selctor returns a list of elements with the class. Then for each loops over the whole list, where box is the current elememt, index is the index of the current element, and boxes is the whole arrya. 
-                            box.addEventListener('input', () => {
-                                if (box.value.length && index < boxes.length - 1) { //if box has a letter and its not the last box 
-                                    boxes[index + 1].focus(); //puts keyboard input into the next box
-                                }
-                            });
-
-                            box.addEventListener('keydown', (event) => { // similar thing, if you press backspace it takes you to the previous box
-                                if (event.key === 'Backspace' && box.value.length === 0 && index > 0) {
-                                    boxes[index - 1].focus();
-                                }
-                            });
-
-                        });
-                    </script>
+                    
 
                 </div>
             </div>
