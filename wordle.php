@@ -45,7 +45,13 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
+                    <span class = "mr-2 user-name text-light">
+                        <?php if(isset($_SESSION["name"])): ?>
+                            <a href="index.php?command=showprofile"><?php echo $_SESSION["name"]; ?></a>
+                        <?php else: ?>
+                            Name Here
+                        <?php endif; ?>
+                    </span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
                         <span class = "login-button-text">Login/Logout</span>
                     </button>
@@ -90,6 +96,13 @@
                                     boxes[index + 1].focus(); //puts keyboard input into the next box
                                 }
                             });
+
+                            box.addEventListener('keydown', (event) => { // similar thing, if you press backspace it takes you to the previous box
+                                if (event.key === 'Backspace' && box.value.length === 0 && index > 0) {
+                                    boxes[index - 1].focus();
+                                }
+                            });
+
                         });
                     </script>
 

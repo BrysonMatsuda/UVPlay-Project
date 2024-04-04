@@ -2,14 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles/wordle.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>     
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
         
-        <title>Daily Wordle</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        
+        <title>Leaderboard</title>
+    
     </head>
+
+
     <body>
 	    <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,7 +35,7 @@
                         <a class="nav-link" href="?command=showquiz">Daily Quiz</a>
                     </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="?command=showleaderboard">Leaderboard</a>
+                        <a class="nav-link" href="?command=showleaderboard">Leaderboard<span class = "sr-only">(current)</span></a>
                     </li>  
                                        
                   </ul>
@@ -45,7 +48,13 @@
                     <div class = "profile-picture mr-2">
                         <img src="monkey.jpg" alt="Profile Picture">
                     </div>
-                    <span class = "mr-2 user-name text-light"><?php if($name == true){echo $name;}else{echo "Name Here";} ?></span>
+                    <span class = "mr-2 user-name text-light">
+                        <?php if(isset($_SESSION["name"])): ?>
+                            <a href="index.php?command=showprofile"><?php echo $_SESSION["name"]; ?></a>
+                        <?php else: ?>
+                            Name Here
+                        <?php endif; ?>
+                    </span>
                     <button class = "btn btn-primary login-button" id = "loginclick">
                         <span class = "login-button-text">Login/Logout</span>
                     </button>
@@ -56,32 +65,50 @@
         </header>
 
 
-        <div class = "container-main">
-            
-            
-            <div class="alert alert-success" role="alert"><?php echo $victoryMessage; ?></div>
-            
-            <div class="wordle-container">
-                <div>
-                    <?php for($numGuessesCounter=0; $numGuessesCounter < 6; $numGuessesCounter++){  ?> 
-                    
-                    <div class="wordle-row">
-                        
-                        <?php for($wordLengthCounter=0; $wordLengthCounter < $wordLength; $wordLengthCounter++){  ?> 
-                        <div class="wordle-cell" style="background-color: <?php if(isset($guessArray[$numGuessesCounter])){if(strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]) == strtoupper($word[$wordLengthCounter])){ echo 'green';}elseif(strpos(strtoupper($word), strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter])) != false){echo 'yellow';}else{echo 'darkgray';}}else{ echo 'initial';}?>;"><?php if(isset($guessArray[$numGuessesCounter])){ echo strtoupper($guessArray[$numGuessesCounter][$wordLengthCounter]);}?></div>
-                        <?php } ?>
-                    </div>
-                    
-                    <?php }?>
-                    
-                    <form action="?command=viewwordleleaderboard" method="post">
-                        <button type="submit" class="btn btn-primary" id="wordleSubmitButton">View Leaderboard</button>
-                    </form>
-                    
 
-                </div>
+
+        <div class = "container-main">
+
+            <div class="dropdownDiv">
+               
+                <select id="myDropdown" name="options" aria-label="Choose a game option to display its leaderboard">
+                    <option value="option1">Daily Quiz</option>
+                    <option value="option2">Daily Crossword</option>
+                    <option value="option3">Daily Wordle</option>
+                    
+                </select>
+            </div>
+
+            
+            <?php if(isset($message) && !empty($message)){?>
+            <div class="alert alert-info" role="alert"><?php echo $message; ?></div>
+            <?php } ?>
+            <div class="leaderboardHeading">
+                <h2 class="leaderboardText2">Today's Wordle Leaderboard</h2>
+            </div>
+            <div class="leaderboard-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($scoresArray as $row){?>
+                        <tr>
+                            <td class="text-light lbentry"><?php echo $row["rank"] ?></td>
+                            <td class="text-light lbentry"><?php echo $row["name"] ?></td>
+                            <td class="text-light lbentry"><?php echo $row["score"] ?></td>
+                        </tr>
+                        <?php } ?>
+                        <!-- Add more entries here -->
+                    </tbody>
+                </table>
             </div>
         </div>
+
 
 
 	    <footer class = "footer">
@@ -97,8 +124,3 @@
         </script>
     </body>
 </html>
-
-
-
-
-
