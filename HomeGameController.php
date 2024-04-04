@@ -481,6 +481,7 @@ class HomeGameController{
         $data["guessArray"] = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : [];
         $data["name"] = isset($_SESSION["name"]) ? $_SESSION["name"] : "No Name";
         $data["wordleVictory"] = isset($_SESSION["wordleVictory"]) ? $_SESSION["wordleVictory"] : false;
+        $data["word"] = isset($_SESSION["wordleWord"]) ? $_SESSION["wordleWord"] : "";
         
         
         include("jsontest.php");
