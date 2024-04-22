@@ -247,3 +247,7 @@ label {
     text-align: center;
 }
 
+.doNotShow {
+    display: none;
+}
+

@@ -6,8 +6,41 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+        <!-- JQUERY -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script src = "quizJS.js"></script>
     
         <title>Daily Quiz</title>
+        <script>
+
+            var quizGame = new QuizController();
+
+            const url ="index.php?command=getjsonquiz";
+            $.ajax({
+                url:url,
+                type: "GET",
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    quizGame.question = response.question;
+                    quizGame.answers = response.answers;
+                    
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error: ' + error);
+                    alert('Error connecting to the server.');
+                }
+            })
+
+            function startGame(){
+
+            }
+
+            
+            
+        </script>
     </head>
     <body>
 	    <header>
@@ -63,13 +96,14 @@
 
 
         <div class = "container-main">
-            <div class="topContainerBar">
+            <button type="button" class="btn btn-primary">Start Quiz</button>
+            <div class="topContainerBar ">
                 <div class="questionBox">
-                    <h3 class="questionText">Name as many UVA acapella groups as you can in 2 minutes!</h3>
+                    <h3 class="questionText doNotShow">Name as many UVA acapella groups as you can in 2 minutes!</h3>
                 </div> 
 
                 <div class="timerBox">
-                    <h3 class="timerText">2:00</h3>
+                    <h3 class="timerText doNotShow">2:00</h3>
                 </div>
             </div>
 
