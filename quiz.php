@@ -99,6 +99,10 @@
                 //show them the answers that they did not get?
                 quizGame.gameOverShowCorrectAnswers();
 
+                $("#message").text("You ran out of time! See the other correct answers below in red!");
+                $("#message").removeClass("doNotShow");
+                $("#message").addClass("alert-danger");
+
                 //turn off answering?
             }
 
@@ -162,6 +166,7 @@
 
 
         <div class = "container-main">
+            <div id="message" class="alert doNotShow" role="alert"></div>
             <button id="startGameButton" type="button" class="btn btn-primary">Start Quiz</button>
             <div class="topContainerBar ">
                 <div class="questionBox">
