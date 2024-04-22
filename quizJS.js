@@ -60,6 +60,20 @@ class QuizController{
         }
         
     }
+
+    gameOverShowCorrectAnswers(){
+        const self = this;
+
+        $('td').each(function() {
+            
+            if($(this).text() == ""){
+                $(this).text(self.currentAnswersLeft[0]);
+                $(this).addClass("wrongAnswer");
+
+                self.currentAnswersLeft.shift();
+            }
+        });
+    }
 }
 
 

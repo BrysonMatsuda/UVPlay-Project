@@ -97,6 +97,7 @@
                 clearInterval(timerVar);
 
                 //show them the answers that they did not get?
+                quizGame.gameOverShowCorrectAnswers();
 
                 //turn off answering?
             }

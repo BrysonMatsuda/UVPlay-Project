@@ -252,3 +252,6 @@ label {
     display: none;
 }
 
+.wrongAnswer {
+    color: red;
+}
