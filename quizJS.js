@@ -2,6 +2,8 @@ class QuizController{
     constructor(){
         this.question = "";
         this.answers = [];
+        this.totalTimeForQuiz = 0; //in seconds
+        this.timeLeft = 0; //in secdonds
 
         this.currentAnswersLeft=[]; //helps keep track of what has already been guessed
     }
@@ -22,6 +24,8 @@ class QuizController{
 
             $('#inputBox').val("");
         }
+
+        //need to add something for if they win!
 
         
     

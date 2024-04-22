@@ -17,6 +17,8 @@
 
             var quizGame = new QuizController();
 
+            var timerVar = "";
+
             const url ="index.php?command=getjsonquiz";
             $.ajax({
                 url:url,
@@ -27,6 +29,8 @@
                     quizGame.question = response.question;
                     quizGame.answers = response.answers;
                     quizGame.currentAnswersLeft = response.answers;
+                    quizGame.totalTimeForQuiz = response.timeInSeconds;
+                    quizGame.timeLeft = response.timeInSeconds;
                     
                 },
                 error: function(xhr, status, error) {
@@ -50,6 +54,12 @@
 
 
                 //do stuf with timer?
+                $(".timerText").removeClass("doNotShow");
+                updateTimerUI();
+
+                //https://www.w3schools.com/js/js_timing.asp
+                timerVar = setInterval(timerTick, 1000);
+
 
 
                 $('#inputBox').on('input', () => {
@@ -58,6 +68,37 @@
                 });
 
 
+            }
+
+            function timerTick(){
+                quizGame.timeLeft--;
+                if(quizGame.timeLeft <= 0){ //TIMES UP
+                    timesUp();
+                }
+                updateTimerUI();
+            }
+
+            function updateTimerUI(){
+
+                let minutes = parseInt(quizGame.timeLeft / 60);
+                let seconds = parseInt(quizGame.timeLeft % 60);
+                if(seconds == 0){
+                    seconds = "00";
+                }
+
+                $(".timerText").text(""+minutes+":"+seconds);
+
+            }
+
+            function timesUp(){
+                //ok so the player ran out of time what should happen?
+
+                //stop the timer
+                clearInterval(timerVar);
+
+                //show them the answers that they did not get?
+
+                //turn off answering?
             }
 
             
@@ -127,7 +168,7 @@
                 </div> 
 
                 <div class="timerBox">
-                    <h3 class="timerText doNotShow">2:00</h3>
+                    <h3 class="timerText doNotShow"></h3>
                 </div>
             </div>
 
