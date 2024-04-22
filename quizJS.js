@@ -8,9 +8,22 @@ class QuizController{
 
     processGuess(guess){ 
 
-        if(this.answers.includes(guess)){//this guess is right
-            
+        if(this.currentAnswersLeft.includes(guess)){//this guess is right
+            $('td').each(function() {
+                console.log("Text: " + $(this).text());
+
+                if($(this).text() == ""){
+                    $(this).text(guess);
+                    return false;
+                }
+            });
+
+            this.currentAnswersLeft = this.currentAnswersLeft.filter(item => item != guess);
+
+            $('#inputBox').val("");
         }
+
+        
     
     }
 

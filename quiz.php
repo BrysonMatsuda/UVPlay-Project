@@ -54,8 +54,6 @@
 
                 $('#inputBox').on('input', () => {
                     console.log('Input changed to: ' + $('#inputBox').val());
-                    
-
                     quizGame.processGuess($('#inputBox').val());
                 });
 
