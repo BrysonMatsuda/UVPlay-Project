@@ -348,6 +348,13 @@ class HomeGameController{
 
     public function showQuiz(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        //check if user is logged in first
+        if(!isset($_SESSION["name"])){
+            header("Location: index.php?command=showlogin");
+            exit();
+        }
+
         include("quiz.php");
     }
 
