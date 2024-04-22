@@ -504,7 +504,7 @@ class HomeGameController{
 
         $data["answers"] = ["Hullabahoos", "Virginia Gentlemen", "Academical Village People", "New Dominions", "Harmonious Hoos", "Hoos In Treble", "Sil'hooettes", "AcHOOstics", "Virginia Belles", "Flying V's", "Ektaal", "Hoos In The Stairwell", "Remix"];
         
-        $data["timeInSeconds"] = 120;
+        $data["timeInSeconds"] = 5;
 
         include("jsontest.php");
     }
