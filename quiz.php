@@ -26,6 +26,7 @@
                     console.log(response);
                     quizGame.question = response.question;
                     quizGame.answers = response.answers;
+                    quizGame.currentAnswersLeft = response.answers;
                     
                 },
                 error: function(xhr, status, error) {
@@ -36,7 +37,32 @@
 
             function startGame(){
 
+                $("#questionText").removeClass("doNotShow");
+                $("#questionText").text(quizGame.question);
+
+                $("#startGameButton").removeClass("btn"); //just had to take out this class bc the below line was not working bc btn added the class display: inlineblock
+                $("#startGameButton").addClass("doNotShow");
+
+
+                //build the table to have a size based on the number of answers in the quiz
+                quizGame.buildTable();
+
+
+
+                //do stuf with timer?
+
+
+                $('#inputBox').on('input', () => {
+                    console.log('Input changed to: ' + $('#inputBox').val());
+                    
+
+                    quizGame.processGuess($('#inputBox').val());
+                });
+
+
             }
+
+            
 
             
             
@@ -96,10 +122,10 @@
 
 
         <div class = "container-main">
-            <button type="button" class="btn btn-primary">Start Quiz</button>
+            <button id="startGameButton" type="button" class="btn btn-primary">Start Quiz</button>
             <div class="topContainerBar ">
                 <div class="questionBox">
-                    <h3 class="questionText doNotShow">Name as many UVA acapella groups as you can in 2 minutes!</h3>
+                    <h3 id="questionText" class="questionText doNotShow"></h3>
                 </div> 
 
                 <div class="timerBox">
@@ -108,13 +134,13 @@
             </div>
 
             <div class="inputBoxDiv">
-                <input type="text" class="inputBox" placeholder="Enter Answers Here...">
+                <input id="inputBox" type="text" class="inputBox" placeholder="Enter Answers Here...">
             </div>
 
             <div class="tableDiv">
-                <table>
+                <table id="gameTable">
                     <tr>
-                        <th></th>
+                        <th>Hullabahoos</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -153,6 +179,12 @@
             document.getElementById("loginclick").onclick = function(){
                 window.location.href = "?command=showlogin";
             };
+        </script>
+
+        <script>
+            $("#startGameButton").click(() => {  // arrow fnction
+                startGame();
+            });
         </script>
     </body>
 </html>
