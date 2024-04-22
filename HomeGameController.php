@@ -62,6 +62,9 @@ class HomeGameController{
             case "jsontest":
                 $this->jsonGetter();
                 break;
+            case "getjsonquiz":
+                $this->jsonQuizGetter();
+                break;
             default:
                 $this->showWelcomePage();
                 break;
@@ -486,6 +489,17 @@ class HomeGameController{
         
         include("jsontest.php");
     }
+
+
+    public function jsonQuizGetter(){
+        
+        $data["question"] = "Name as many UVA acapella groups as you can in 2 minutes!!";
+
+        $data["answers"] = ["Hullabahoos", "Virginia Gentlemen", "Academical Village People", "New Dominions", "Harmonious Hoos", "Hoos In Treble", "Sil'hooettes", "AcHOOstics", "Virginia Belles", "Flying V's", "Ektaal", "Hoos In The Stairwell", "Remix"];
+        
+        include("jsontest.php");
+    }
+
 
 
 
