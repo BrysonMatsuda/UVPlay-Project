@@ -36,7 +36,8 @@ class HomeGameController{
                 $this->showWelcomePage();
                 break;
             case "showleaderboard":
-                $this->showLeaderboard();  
+                //$this->showLeaderboard();  
+                $this->viewWordleLeaderboard();
                 break;
             case "logout":
                 $this->sessionDestroyer();
@@ -57,6 +58,12 @@ class HomeGameController{
                 break;
             case "viewwordleleaderboard":
                 $this->viewWordleLeaderboard();
+                break;
+            case "jsontest":
+                $this->jsonGetter();
+                break;
+            case "getjsonquiz":
+                $this->jsonQuizGetter();
                 break;
             default:
                 $this->showWelcomePage();
@@ -90,30 +97,44 @@ class HomeGameController{
             $newUsername = isset($_POST["newUsername"]) ? $_POST["newUsername"] : $currentUsername;
             $newPassword = isset($_POST["newPassword"]) ? $_POST["newPassword"] : $currentPassword;
     
-            $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
-    
             $usernameChanged = $newUsername !== $currentUsername;
             $passwordChanged = $newPassword !== $currentPassword;
     
             if ($usernameChanged || $passwordChanged) {
-                if ($passwordChanged && !preg_match($password_pattern, $newPassword)) {
-                    echo "<script>alert('Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long.');</script>";
-                } else {
-                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-                    $result = $this->db->query("UPDATE users SET name = $1, password = $2 WHERE name = $3", $newUsername, $hashedPassword, $currentUsername);
-    
-                    if ($result !== false) {
-                        if (count($result) > 0) {
-                            $_SESSION["name"] = $newUsername;
-                            $_SESSION["password"] = $hashedPassword;
-                            echo "<script>alert('Details updated successfully!');</script>";
-                        } else {
-                            echo "<script>alert('No rows affected.');</script>";
-                        }
-                    } else {
-                        echo "<script>alert('Error occurred during update.');</script>";
+                if ($passwordChanged && $newPassword !== "") {
+                    $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
+                    if (!preg_match($password_pattern, $newPassword)) {
+                        echo "<script>alert('Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long.');</script>";
+                        include("editprofile.php");
+                        return;
                     }
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                    $newPasswordFinal = $newPassword;
+                } else {
+                    $hashedPassword = $currentPassword;
+                    $newPasswordFinal = $currentPassword;
+                }
+                if ($usernameChanged && $passwordChanged) {
+                    $query = "UPDATE users SET name = $1, password = $2 WHERE name = $3";
+                } elseif ($usernameChanged) {
+                    $query = "UPDATE users SET name = $1 WHERE name = $2";
+                } else {
+                    $query = "UPDATE users SET password = $1 WHERE name = $2";
+                }
+                $result = $this->db->query($query, $newUsername, $hashedPassword, $currentUsername);
+    
+                if ($result !== false) {
+                    if (count($result) > 0) {
+                        $_SESSION["name"] = $newUsername;
+                        $_SESSION["password"] = $newPasswordFinal;
+                    } else {
+                        if($newUsername !== ""){
+                            $_SESSION["name"] = $newUsername;
+                        }
+                        $_SESSION["password"] = $newPasswordFinal;
+                    }
+                } else {
+                    echo "<script>alert('Error occurred during update.');</script>";
                 }
             } else {
                 echo "<script>alert('No changes were made.');</script>";
@@ -122,6 +143,10 @@ class HomeGameController{
     
         include("editprofile.php");
     }
+    
+    
+    
+    
 
     public function checkStats(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
@@ -143,6 +168,11 @@ class HomeGameController{
 
     public function showWordle($errorMessage=""){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        if(!isset($_SESSION["name"])){
+            header("Location: index.php?command=showlogin");
+            exit();
+        }
 
         if(isset($_SESSION["wordleVictory"])){
             if($_SESSION["wordleVictory"]){
@@ -318,6 +348,13 @@ class HomeGameController{
 
     public function showQuiz(){
         $name = isset($_SESSION["name"]) ? $_SESSION["name"] : "Name Here";
+
+        //check if user is logged in first
+        if(!isset($_SESSION["name"])){
+            header("Location: index.php?command=showlogin");
+            exit();
+        }
+
         include("quiz.php");
     }
 
@@ -329,10 +366,8 @@ class HomeGameController{
     public function checkPostedInfo(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(!empty($_POST["name"]) && !empty($_POST["password"])){
-                $_SESSION["name"] = $_POST["name"];
-                $_SESSION["password"] = $_POST["password"];
-                $name = $_SESSION["name"];
-                $password = $_SESSION["password"];
+                $name = $_POST["name"];
+                $password = $_POST["password"];
                 $validPassword = false;
     
                 $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
@@ -344,11 +379,11 @@ class HomeGameController{
                     $res = $this->db->query("SELECT * FROM users WHERE name = $1;", $name);
     
                     if(!empty($res)){
-                        // If user exists, verify the password
                         $storedPassword = $res[0]["password"];
                         if(password_verify($password, $storedPassword)){
-                            $_SESSION["name"] = $name;
+                            $_SESSION["name"] = $name; // Update session name only if password is correct
                             setcookie("username", $name, time() + 3600, "/");
+                            $_SESSION["password"] = $password;
                             $this->showWelcomePage();
                         } else {
                             //Password doesn't match
@@ -359,8 +394,9 @@ class HomeGameController{
                         // User doesn't exist, add user to the database
                         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                         $this->db->query("INSERT INTO users (name, password) VALUES ($1, $2);", $name, $hashedPassword);
-                        $_SESSION["name"] = $name;
+                        $_SESSION["name"] = $name; // Update session name only if password is correct
                         setcookie("username", $name, time() + 3600, "/");
+                        $_SESSION["password"] = $password;
                         $this->showWelcomePage();
                     }
                 } else {
@@ -376,6 +412,7 @@ class HomeGameController{
             include("login.php");
         }
     }
+    
 
 
 
@@ -442,6 +479,40 @@ class HomeGameController{
         include("wordleleaderboard.php");
         exit();
     }
+
+
+
+    public function jsonGetter(){
+        
+        //you know how NYT does that thing where they allow you to export your score? i was thinking this could be something like that. 
+
+        
+        
+        $data["guessArray"] = isset($_SESSION["wordleGuessArray"]) ? $_SESSION["wordleGuessArray"] : [];
+        $data["name"] = isset($_SESSION["name"]) ? $_SESSION["name"] : "No Name";
+        $data["wordleVictory"] = isset($_SESSION["wordleVictory"]) ? $_SESSION["wordleVictory"] : false;
+        $data["word"] = isset($_SESSION["wordleWord"]) ? $_SESSION["wordleWord"] : "";
+        
+        
+        include("jsontest.php");
+    }
+
+
+    public function jsonQuizGetter(){
+        
+        $data["question"] = "Name as many UVA acapella groups as you can in 2 minutes!!";
+
+        $data["answers"] = ["Hullabahoos", "Virginia Gentlemen", "Academical Village People", "New Dominions", "Harmonious Hoos", "Hoos In Treble", "Sil'hooettes", "AcHOOstics", "Virginia Belles", "Flying V's", "Ektaal", "Hoos In The Stairwell", "Remix"];
+        
+        $data["timeInSeconds"] = 120;
+
+        include("jsontest.php");
+    }
+
+
+
+
+
 }
 
 

@@ -161,8 +161,9 @@ h1{
 
 .tableDiv th, .tableDiv td {
     border: 1px solid white;
-    padding: 20px;
-    text-align: left;
+    width: 80px;
+    height: 40px;
+    text-align: center;
 }
 
 .inputBoxDiv {
@@ -233,6 +234,34 @@ label {
     display: none;
 }
 
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container .btn {
+    margin-right: 5px;
+}
+
 .lbentry {
     text-align: center;
+}
+
+.doNotShow {
+    display: none;
+}
+
+.wrongAnswer {
+    color: red;
+    font-weight: bold;
+}
+
+.correctAnswer {
+    color: greenyellow;
+    font-weight: bold;
+}
+
+#startGameButton {
+    margin-bottom: 25px;
 }

@@ -66,13 +66,17 @@
             <div class="container">
                 <div>
                 <?php if(isset($_SESSION["name"])): ?>
-                    <p>Welcome, <?php echo $_SESSION["name"]; ?>, Edit Your Profile Here!</p>
-                    
-                <?php endif; ?>
-                <?php if(isset($_SESSION["name"])): ?>
-                    <a href="index.php?command=showdetails" class="btn btn-primary mr-2">Edit Profile</a>
-                    <a href="index.php?command=checkstats" class="btn btn-primary">My Stats</a>
-                <?php endif; ?>
+    <p>Welcome <?php echo $_SESSION["name"]; ?>, Edit Your Profile Here!</p>
+    <div class="button-container">
+        <form action="index.php?command=showdetails" method="POST">
+            <input type="hidden" name="username" value="<?php echo $_SESSION["name"]; ?>">
+            <button type="submit" class="btn btn-primary">Edit Profile</button>
+        </form>
+        <a href="index.php?command=checkstats" class="btn btn-primary ml-2">My Stats</a>
+    </div>
+<?php endif; ?>
+
+
                 </div>
             </div>
         </div>

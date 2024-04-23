@@ -72,9 +72,10 @@
             <div class="dropdownDiv">
                
                 <select id="myDropdown" name="options" aria-label="Choose a game option to display its leaderboard">
-                    <option value="option1">Daily Quiz</option>
-                    <option value="option2">Daily Crossword</option>
-                    <option value="option3">Daily Wordle</option>
+                    <option value="option1">Daily Wordle</option>
+                    <option value="option2">Daily Quiz</option>
+                    <option value="option3">Daily Crossword</option>
+                    
                     
                 </select>
             </div>
