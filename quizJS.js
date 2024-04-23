@@ -5,10 +5,13 @@ class QuizController{
         this.totalTimeForQuiz = 0; //in seconds
         this.timeLeft = 0; //in secdonds
 
+        this.timerVar = "";
+
         this.currentAnswersLeft=[]; //helps keep track of what has already been guessed
     }
 
     processGuess(guess){ 
+        
 
         if(this.currentAnswersLeft.includes(guess)){//this guess is right
             $('td').each(function() {
@@ -16,16 +19,26 @@ class QuizController{
 
                 if($(this).text() == ""){
                     $(this).text(guess);
-                    return false;
+                    $(this).addClass("correctAnswer");
+                    return false;//stops the each loop
                 }
             });
 
             this.currentAnswersLeft = this.currentAnswersLeft.filter(item => item != guess);
+            
 
             $('#inputBox').val("");
         }
 
         //need to add something for if they win!
+
+        
+        if(this.currentAnswersLeft.length == 0){ //user won the game!!
+            clearInterval(this.timerVar); //stop the timer
+            $("#message").text("Congratulations! You Won!");
+            $("#message").removeClass("doNotShow");
+            $("#message").addClass("alert-success");
+        }
 
         
     

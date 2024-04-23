@@ -17,7 +17,7 @@
 
             var quizGame = new QuizController();
 
-            var timerVar = "";
+            
 
             const url ="index.php?command=getjsonquiz";
             $.ajax({
@@ -58,7 +58,7 @@
                 updateTimerUI();
 
                 //https://www.w3schools.com/js/js_timing.asp
-                timerVar = setInterval(timerTick, 1000);
+                quizGame.timerVar = setInterval(timerTick, 1000);
 
 
 
@@ -82,8 +82,8 @@
 
                 let minutes = parseInt(quizGame.timeLeft / 60);
                 let seconds = parseInt(quizGame.timeLeft % 60);
-                if(seconds == 0){
-                    seconds = "00";
+                if(seconds >= 0 && seconds <= 9){
+                    seconds ="0" +seconds;
                 }
 
                 $(".timerText").text(""+minutes+":"+seconds);
@@ -94,7 +94,7 @@
                 //ok so the player ran out of time what should happen?
 
                 //stop the timer
-                clearInterval(timerVar);
+                clearInterval(quizGame.timerVar);
 
                 //show them the answers that they did not get?
                 quizGame.gameOverShowCorrectAnswers();
@@ -185,7 +185,7 @@
             <div class="tableDiv">
                 <table id="gameTable">
                     <tr>
-                        <th>Hullabahoos</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
