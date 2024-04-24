@@ -85,5 +85,10 @@
                 window.location.href = "?command=showlogin";
             };
         </script>
+        <script>
+            window.onload = function() {
+                document.getElementById("name").focus();
+            };
+</script>
     </body>
 </html>
