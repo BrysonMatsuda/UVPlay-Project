@@ -44,7 +44,7 @@
 
                   <div class="navbar-nav ml-auto">
                     <div class = "profile-picture mr-2">
-                        <img src="monkey.jpg" alt="Profile Picture">
+                        <img src="pp.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name text-light">
                         <?php if(isset($_SESSION["name"])): ?>
@@ -72,7 +72,7 @@
             <input type="hidden" name="username" value="<?php echo $_SESSION["name"]; ?>">
             <button type="submit" class="btn btn-primary">Edit Profile</button>
         </form>
-        <a href="index.php?command=checkstats" class="btn btn-primary ml-2">My Stats</a>
+        <!--<a href="index.php?command=checkstats" class="btn btn-primary ml-2">My Stats</a>-->
     </div>
 <?php endif; ?>
 
