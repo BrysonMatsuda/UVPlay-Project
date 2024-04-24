@@ -61,11 +61,17 @@
                 quizGame.timerVar = setInterval(timerTick, 1000);
 
 
+                /*
+                $('#inputBox').on('input', () => { //change to anon function
+                    console.log('Input changed to: ' + $('#inputBox').val());
+                    quizGame.processGuess($('#inputBox').val());
+                }); */
 
-                $('#inputBox').on('input', () => {
+                $('#inputBox').on('input', function() { //ANONYMOUS FUNCTION
                     console.log('Input changed to: ' + $('#inputBox').val());
                     quizGame.processGuess($('#inputBox').val());
                 });
+
 
 
             }
