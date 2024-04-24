@@ -90,18 +90,21 @@
         </header>
         <div class = "container-main">
             <div class="container">
+                <!--
                 <section class="section">
                     <img src="crossword.jpg" width="300" alt="Crossword" class="same-size-image">
                     <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
                 </section>
+                        -->
                 <section class="section">
                     <img src="wordle.jpg" width="300" alt="Wahoo Word" class="same-size-image">
                     <h2><a href="?command=showwordle" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
                 </section>
                 <section class="section">
-                    <img src="lightbulb.jpg" width="300" alt="Random" class="same-size-image">
+                    <img src="Quiz-Logo.png" width="300" alt="Random" class="same-size-image">
                     <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
                 </section>
+                            
             </div>
         </div>
 	    <footer class = "footer">
