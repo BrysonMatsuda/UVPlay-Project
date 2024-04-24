@@ -53,7 +53,7 @@
 
                   <div class="navbar-nav ml-auto">
                     <div class = "profile-picture mr-2">
-                        <img src="monkey.jpg" alt="Profile Picture">
+                        <img src="pp.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name text-light">
                         <?php if(isset($_SESSION["name"])): ?>
@@ -78,7 +78,7 @@
                 </div>
                 <div class = "col-auto d-flex align-items-center">
                     <div class = "profile-picture mr-2">
-                        <img src="monkey.jpg" alt="Profile Picture">
+                        <img src="pp.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name">NAME HERE</span>
                     <button class = "btn btn-primary login-button">
@@ -90,18 +90,21 @@
         </header>
         <div class = "container-main">
             <div class="container">
+                <!--
                 <section class="section">
                     <img src="crossword.jpg" width="300" alt="Crossword" class="same-size-image">
                     <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Crossword</a></h2>
                 </section>
+                        -->
                 <section class="section">
                     <img src="wordle.jpg" width="300" alt="Wahoo Word" class="same-size-image">
                     <h2><a href="?command=showwordle" style="color:rgb(0, 0, 0); text-decoration: underline;">Wahoo Word</a></h2>
                 </section>
                 <section class="section">
-                    <img src="lightbulb.jpg" width="300" alt="Random" class="same-size-image">
+                    <img src="Quiz-Logo.png" width="300" alt="Random" class="same-size-image">
                     <h2><a href="?command=showquiz" style="color:rgb(0, 0, 0); text-decoration: underline;">Quiz</a></h2>
                 </section>
+                            
             </div>
         </div>
 	    <footer class = "footer">

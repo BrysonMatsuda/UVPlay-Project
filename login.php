@@ -40,7 +40,7 @@
 
                   <div class="navbar-nav ml-auto">
                     <div class = "profile-picture mr-2">
-                        <img src="monkey.jpg" alt="Profile Picture">
+                        <img src="pp.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name text-light">
                         <?php if(isset($_SESSION["name"])): ?>
@@ -85,5 +85,10 @@
                 window.location.href = "?command=showlogin";
             };
         </script>
+        <script>
+            window.onload = function() {
+                document.getElementById("name").focus();
+            };
+</script>
     </body>
 </html>

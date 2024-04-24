@@ -36,8 +36,8 @@ class HomeGameController{
                 $this->showWelcomePage();
                 break;
             case "showleaderboard":
-                //$this->showLeaderboard();  
-                $this->viewWordleLeaderboard();
+                $this->showLeaderboard();  
+                //$this->viewWordleLeaderboard();
                 break;
             case "logout":
                 $this->sessionDestroyer();

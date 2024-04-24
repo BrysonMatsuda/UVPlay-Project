@@ -46,7 +46,7 @@
 
                   <div class="navbar-nav ml-auto">
                     <div class = "profile-picture mr-2">
-                        <img src="monkey.jpg" alt="Profile Picture">
+                        <img src="pp.jpg" alt="Profile Picture">
                     </div>
                     <span class = "mr-2 user-name text-light">
                         <?php if(isset($_SESSION["name"])): ?>
@@ -125,7 +125,7 @@
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td><img src="monkey.jpg" alt="Profile 2"></td>
+                            <td><img src="pp.jpg" alt="Profile 2"></td>
                             <td>Bob</td>
                             <td>90</td>
                         </tr>
@@ -165,6 +165,31 @@
             document.getElementById("loginclick").onclick = function(){
                 window.location.href = "?command=showlogin";
             };
+
+            function showWordleLeaderboard(){
+                window.location.href = "?command=viewwordleleaderboard";
+            }
+            function showCrosswordLeaderboard(){
+                window.location.href = "?command=viewcrosswordleaderboard";
+            }
+            function showQuizLeaderboard(){
+                window.location.href = "?command=viewquizleaderboard";
+            }
+            window.onload = function(){
+                var dropdown = document.getElementById("myDropdown");
+                dropdown.addEventListener('change', function(){
+                    var selectedOption =dropdown.value;
+                    if(selectedOption === "option1"){
+                        showQuizLeaderboard();
+                    }
+                    else if(selectedOption === "option2"){
+                        showCrosswordLeaderboard();
+                    }
+                    else if(selectedOption === "option3"){
+                        showWordleLeaderboard();
+                    }
+                });
+            }
         </script>
     </body>
 </html>
